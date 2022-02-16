@@ -1,41 +1,9 @@
 import React from 'react'
 
 class CartItem extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            price:999,
-            title:'Mobile Phone',
-            qty:1,
-            img:''
-        }
-    }
-
-    increaseQuantity = () => {
-        console.log('this',this.state);
-    //     this.setState({
-    //         qty: this.state.qty + 1
-    //     });
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty + 1
-            }
-        });
-     }
-     decreaseQuantity = () => {
-        const { qty } = this.state;
-        if ( qty === 0){
-            return;
-        }
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty - 1
-            }
-        });
-     }
-
+ 
     render(){
-        const {title, price, qty} = this.state
+        const {title, price, qty} = this.props.product
         return(
                 <div className='cart-item'>
                     <div className='left-block'>
@@ -51,18 +19,19 @@ class CartItem extends React.Component{
                              alt='increase' 
                              className='action-icons' 
                              src='https://cdn-icons-png.flaticon.com/512/1828/1828925.png'
-                             onClick={this.increaseQuantity} >
+                             onClick={() => this.props.onIncreaseQty(this.props.product)} >
                             </img>
                             <img
                              alt='decrease' 
                              className='action-icons' 
                              src='https://cdn-icons-png.flaticon.com/512/43/43625.png'
-                             onClick={this.decreaseQuantity}>
+                             onClick={() => this.props.onDecreaseQty(this.props.product)}>
                             </img>
                             <img
                              alt='delete' 
                              className='action-icons' 
-                             src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png'>
+                             src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png'
+                             onClick={() => this.props.onDeleteProduct(this.props.product.id)}>
                             </img>
                         </div>
                     </div>
